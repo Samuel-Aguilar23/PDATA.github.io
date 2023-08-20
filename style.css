@@ -1,0 +1,38 @@
+#container {
+    height: 500px;
+    min-width: 310px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+nav ul {
+    background: #ffffff;
+    list-style: none;
+    overflow: hidden;
+  }
+  
+  ul li {
+    display: inline-block;
+    padding: 20px 0 15px 0;
+    transition: all ease-in-out 250ms;
+  }
+  
+  ul li a{
+    color: #de5470;
+    text-decoration: none;
+	padding: 20px;
+  }
+    ul li a:hover {
+    background: #de5470;
+	color: #FFFFFF!important;
+  }
+  .hide {
+    padding: 16px;
+    font-size: 80px;
+	  text-align: right;
+    color: #de5470;
+    cursor: pointer;
+    display: none;
+	  float: right;
+	  width: 40%;
+  }

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIC DATA | HackCorruption 2023</title>   
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+    <div class="top-bar" style="text-align: center;">
+        <img src="/img/picdata.png" alt="Hackcorruption" style="width: 800px; height: auto;">
+    </div>
+
+      <nav>
+        <ul>
+          <li><a href="#Inicio">Home</a></li>
+          <li><a href="#Mapa">Drug Traffic Map</a></li>
+          <li><a href="#Analisis">Analytics</a></li>
+          <li><a href="#Créditos">Credits</a></li>
+        </ul>
+        <div class="hide">
+          <i class="fa fa-bars" aria-hidden="true"></i> MENÚ
+      </div>
+    </nav>
+
+    <div class="seccion" id="#Mapa">
+        <h1>Counterfeit Drugs Statistics</h1></br>
+
+    <style>
+ #container {
+    height: 500px;
+    min-width: 310px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+    </style>
+
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+<script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
+
+<div id="container"></div>
+   
+<script>
+
+ (async () => {
+
+const topology = await fetch(
+    'https://code.highcharts.com/mapdata/custom/world.topo.json'
+).then(response => response.json());
+
+const data = await fetch(
+    'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/world-population.json'
+).then(response => response.json());
+
+Highcharts.mapChart('container', {
+    chart: {
+        map: topology
+    },
+
+    title: {
+        text: 'Trafficking in Counterfeit Drugs'
+    },
+
+    subtitle: {
+        text: 'Monitoring of counterfeit medicines by country'
+    },
+
+    accessibility: {
+        description: 'Trafficking in Counterfeit Drugs'
+    },
+
+    legend: {
+        enabled: false
+    },
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    mapView: {
+        fitToGeometry: {
+            type: 'MultiPoint',
+            coordinates: [
+                // Alaska west
+                [-164, 54],
+                // Greenland north
+                [-35, 84],
+                // New Zealand east
+                [179, -38],
+                // Chile south
+                [-68, -55]
+            ]
+        }
+    },
+
+    series: [{
+        name: 'Countries',
+        color: '#cccccc',
+        enableMouseTracking: false
+    }, {
+        type: 'mapbubble',
+        name: 'Counterfeit Drugs',
+        joinBy: ['iso-a3', 'code3'],
+        data: data,
+        minSize: 4,
+        maxSize: '12%',
+        tooltip: {
+            pointFormat: '{point.properties.hc-a2}: {point.z} thousands'
+        }
+    }]
+});
+})();
+
+ Highcharts.chart('container_one', {
+    chart: {
+        type: 'spline',
+        animation: Highcharts.svg, // don't animate in old IE
+        marginRight: 10,
+        events: {
+            load: function () {
+
+                // set up the updating of the chart each second
+                var series = this.series[0];
+                setInterval(function () {
+                    var x = (new Date()).getTime(), // current time
+                        y = Math.random();
+                    series.addPoint([x, y], true, true);
+                }, 1000);
+            }
+        }
+    },
+
+    time: {
+        useUTC: false
+    },
+
+    title: {
+        text: 'Counterfeit Drugs by Date'
+    },
+
+    accessibility: {
+        announceNewData: {
+            enabled: true,
+            minAnnounceInterval: 15000,
+            announcementFormatter: function (allSeries, newSeries, newPoint) {
+                if (newPoint) {
+                    return 'New point added. Value: ' + newPoint.y;
+                }
+                return false;
+            }
+        }
+    },
+
+    xAxis: {
+        type: 'datetime',
+        tickPixelInterval: 150
+    },
+
+    yAxis: {
+        title: {
+            text: 'Value'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#d3ab7b'
+        }]
+    },
+
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br/>',
+        pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+    },
+
+    legend: {
+        enabled: false
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Counterfeit Drugs',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
+
+            for (i = -19; i <= 0; i += 1) {
+                data.push({
+                    x: time + i * 1000,
+                    y: Math.random()
+                });
+            }
+            return data;
+        }())
+    }]
+});
+
+</script>
+
+<div id="container_one" style="width: 100%; height: 650px;"></div> 
+
+
+<script>
+ Highcharts.chart('container_one', {
+    chart: {
+        type: 'spline',
+        animation: Highcharts.svg, // don't animate in old IE
+        marginRight: 10,
+        events: {
+            load: function () {
+
+                // set up the updating of the chart each second
+                var series = this.series[0];
+                setInterval(function () {
+                    var x = (new Date()).getTime(), // current time
+                        y = Math.random();
+                    series.addPoint([x, y], true, true);
+                }, 1000);
+            }
+        }
+    },
+
+    time: {
+        useUTC: false
+    },
+
+    title: {
+        text: 'Counterfeit Drugs by Date'
+    },
+
+    accessibility: {
+        announceNewData: {
+            enabled: true,
+            minAnnounceInterval: 15000,
+            announcementFormatter: function (allSeries, newSeries, newPoint) {
+                if (newPoint) {
+                    return 'New point added. Value: ' + newPoint.y;
+                }
+                return false;
+            }
+        }
+    },
+
+    xAxis: {
+        type: 'datetime',
+        tickPixelInterval: 150
+    },
+
+    yAxis: {
+        title: {
+            text: 'Value'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#086482'
+        }]
+    },
+
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br/>',
+        pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+    },
+
+    legend: {
+        enabled: false
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Counterfeit Drugs',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
+
+            for (i = -19; i <= 0; i += 1) {
+                data.push({
+                    x: time + i * 1000,
+                    y: Math.random()
+                });
+            }
+            return data;
+        }())
+    }]
+});
+</script>
+
+<div class="seccion">
+    <h1>Credits</h1>
+    
+    <p> Karol Aguilar, Perla García  </p>
+    <p> Samuel Aguilar, Julián Mena, Jorge García </p>
+    </div>
+
+
+</body>
+
+</html>
+
+
+
